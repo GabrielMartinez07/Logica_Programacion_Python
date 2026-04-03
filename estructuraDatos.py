@@ -70,3 +70,94 @@ print(type(my_dict))
 Ejercicio 
 """
 print("----------- Seccion del ejercicio -----------")
+
+def agregar_contacto(nombre, telefono):
+    if telefono.isdigit() and len(telefono) > 0 and len(telefono) < 12:
+        agenda_contactos[nombre] = telefono
+        print(agenda_contactos) 
+    else: 
+        print("Debes de ingresar un numero de telefono menor a 12 digitos")
+
+def buscar_contacto(nombre):
+    if nombre in agenda_contactos:
+        print(f"El numero de telefono de {nombre} es: {agenda_contactos[nombre]}")
+    else:
+        print("El contacto no existe dentro de la agenda")    
+
+def mostrar_contactos():
+    print(agenda_contactos)
+    
+def actualizar_contacto(name, new_phone):
+    if name in agenda_contactos:
+        validacion_telefono(name, new_phone)
+    else: 
+        print("Debes de ingresar un numero de telefono menor a 12 digitos")
+    
+def eliminar_contacto(name: str) -> dict:
+    if name in agenda_contactos:
+        del agenda_contactos[name]
+        print(agenda_contactos)
+    else:
+        print("El contacto no esta registrado en la agenda")
+        
+def validacion_telefono(name, phone):
+    if phone.isdigit() and len(phone) > 0 and len(phone) <= 12:
+        agenda_contactos[name] = phone
+        print(agenda_contactos)
+        
+    
+
+menu_opcion = 0
+agenda_contactos: dict = {}
+
+
+while menu_opcion !=6:
+    
+    print("\n--- MENÚ DE OPERACIONES ---")
+    print("\n--- Agenda de contactos ---")
+    print("1. Agregar contacto")
+    print("2. Buscar contacto")
+    print("3. Eliminar contacto")
+    print("4. Actualizar contacto")
+    print("5. Mostrar contactos")
+    print("6. Salir")
+    
+    menu_opcion = int(input("Selecciona una opcion: "))
+    
+    if menu_opcion == 1:
+        
+        print("Has seleccionado la opcion de agregar contacto")
+        nombre = input("Ingresa el nombre del nuevo contacto: ")
+        telefono = input("Ingresa el telefono del nuevo contacto: ")
+        agregar_contacto(nombre, telefono)
+        
+    elif menu_opcion == 2:
+        
+        print("Has seleccionado la opcion de buscar contacto")
+        search_name = input("Ingresa el nombre del contacto a buscar:")
+        buscar_contacto(search_name)
+    
+    elif menu_opcion == 3:
+        
+        print("Has seleccionado la opcion de eliminar contacto")
+        delete_name = input("Ingresa el nombre del contacto a eliminar: ")
+        eliminar_contacto(delete_name)
+        
+    elif menu_opcion == 4:
+        
+        print("Has seleccionado la opcion de actualizar contacto")
+        new_name = input("Ingresa el nombre del contacto a actualizar: ")
+        new_phone = input("Ingresa el nuevo telefono del contacto:")
+        actualizar_contacto(new_name, new_phone)
+        
+    elif menu_opcion == 5:
+        
+        print("Has seleccionado la opcion de mostrar contactos")
+        mostrar_contactos()
+        
+    elif menu_opcion == 6:
+        print("Cerrando agenda....")
+        break
+    else:
+        print("Opcion no valida, intenta de nuevo")
+    
